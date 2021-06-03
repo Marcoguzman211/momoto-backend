@@ -2,11 +2,11 @@ const bouncer = require("express-bouncer")(500, 900000); // importation du paque
 const express = require('express'); // importation du paquet express
 const router = express.Router(); // création du router
 
-const usersCtrl = require('')
+const usersCtrl = require("../controllers/users")
 
 //TODO middlewares d'authetification et validation
 
-router.post('/signup') //Création d'un utilisateur
+router.post('/signup', usersCtrl.signUp) //Création d'un utilisateur
 router.post('/login') //connexion d'un utilisateur
 router.get('/:id') //Recupération d'un utilisateur
 router.put('/update') //Mise à jour d'un utilisateur

@@ -3,16 +3,22 @@ const cors = require('cors')
 const PORT = process.env.PORT || 3000
 const connection = require('./config/dbconnection')
 
+//Routes
+const usersRoutes = require('./routes/users')
+
 const app = express()
 
-app.use('/test', (req, res) => {
-    connection.query('SELECT 123', (err, results, fields) => {
-        if (err) throw err;
-        console.log('Bonjour tout le monde')
-        res.send(fields)
-      });
-    
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
+    next()
 })
+
+app.use(express.urlencoded({ extended: true }))
+
+
+app.use("/users", usersRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
