@@ -9,7 +9,8 @@ dotenv.config()
 const mysql_database = {
     host     : 'localhost',
     user     : 'momoto',
-    password : 'Vwuning34@'
+    password : 'Vwuning34@',
+    database : 'momoto_db'
 }
 
 //Création de la connexion avec le module mysql2 avec l'objet créé dans config.js

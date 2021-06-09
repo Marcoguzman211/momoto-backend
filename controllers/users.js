@@ -35,9 +35,8 @@ exports.signUp = (req, res) => {
         bcrypt.hash(password, 10, (error, hash) => {
             let sql = "INSERT INTO users (nom, prenom, email, password, bio) VALUES (?,?,?,?,?)"
             let inserts = [nom, prenom, email, hash, bio]
-            sql = mysql.format(sql, inserts)
 
-            const usersSignup = db.query(sql, (error, user) => {
+            const usersSignup = db.query(sql, inserts, (error, user) => {
                 if (!error) {
                     res.status(201).json({
                         message: "L'utilisateur a été créé avec succès",
